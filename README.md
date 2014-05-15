@@ -2,8 +2,11 @@ XBLOG<img src="https://camo.githubusercontent.com/aad04bb6e3a7978f5b9ea8d0415e75
 
 ================================================================================
 
+<div>
 这是一个建立在Google App Engine上面的开源Blog系统,欢迎使用!
 预览:<a href="http://blog.xcmd.net">http://blog.xcmd.net</a>
+</div>
+
 ===============================================================================
 
 <pre>
