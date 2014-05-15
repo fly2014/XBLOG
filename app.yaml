@@ -1,0 +1,40 @@
+application: haliluyafanqiangc
+version: 4
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: '3650d'
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+- url: /style
+  static_dir: style
+- url: /admin/.*
+  script: admin.app
+  login: admin
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: jinja2
+  version: "2.6"
+- name:    PIL
+  version: 1.1.7
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?.*\.bak$
+- ^(.*/)?.*\humbs.db$

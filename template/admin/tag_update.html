@@ -1,0 +1,84 @@
+{% include 'template/admin/header.html' %}
+<script type="text/javascript">
+    $(function () {
+        $("#tb_isclass").change(function (event) {
+            if($("#tb_isclass").prop("checked") === true) {
+                $(this).val('true');
+                $('#page').show();
+            }
+            else {
+                $(this).val('false');
+                $('#page').hide();
+            }
+        });
+		function showispage(v){
+			if(v=='True'){
+				$('#page').show();
+				$("#tb_isclass").prop("checked",true);
+				}
+			else{
+				$('#page').hide();
+				$("#tb_isclass").prop("checked",false);
+				}
+		}
+		showispage('{{tag.isclass}}')
+    });
+</script>
+<div class="function">
+    <ul>
+        <li><a href="/admin/tag_add">发表</a></li>
+		<li><a href="/admin/tag">标签</a></li>
+		<li><a href="/admin/tag_c">分类</a></li>
+    </ul>
+</div>
+<table class="left">
+    <tbody>
+        <tr>
+            <td>
+                <form action="{{action_url}}" method="post">
+				<fieldset>
+					<legend>修改标签</legend>				
+				<div class="editer" >
+                    <label for="tb_content">
+                        标签：</label>
+                    <input  id="tb_content" name="tb_content" type="text" value="{{tag.content}}">
+                </div>
+                <div class="editer">
+                    <label for="tb_isclass">
+                        分类：</label>
+                    <input type="checkbox" id="tb_isclass" name="tb_isclass" value="{{tag.isclass}}"></div>               
+                <div id="page" style="display: none">
+                    <div class="editer">
+                        <label for="tb_classname">
+                            分类名字</label>
+                        <input type="text" value="{{tag.classname}}" id="tb_classname" size="10" name="tb_classname">
+                    </div>
+					<div class="editer">
+                        <label for="tb_classindex">
+                            分类顺序</label>
+                        <input type="text" value="{{tag.classindex}}" id="tb_classindex" size="10" name="tb_classindex">
+                    </div>
+					<div class="editer">
+						<label for="tb_img">图片：</label>
+						<input type="text" id="tb_img" name="tb_img" value="{{tag.img_id}}">
+					</div>
+                </div>
+                <div class=tb_footer>
+                    <input type="submit" value="保存" id="btn_save">
+                    <span id="span_msg">
+                    </span>
+                </div>
+				</fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="readme">
+					<strong>提示</strong>:<span class="field-validation-error">*</span>
+				</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% include 'template/admin/footer.html' %} 

@@ -1,0 +1,87 @@
+<div id="sidebar" class="clearfix">
+	<div id="sidebar-main">
+		<div id="side-top-wrap">
+			<ul id="side-top" class="clearfix">
+				<li class="qweibo">
+					<a href="http://wpa.qq.com/msgrd?V=1&Menu=yes&Uin={{base.QQ}}" target="_blank" rel="nofollow" title="Q 我"><span class="icon"></span></a>
+				</li>
+				<li class="weibo">
+					<a href={% if base.Sweibo %}"{{base.Sweibo}}"{% else %}"javascript:void(0)" class="sina-share" {% endif %} rel="nofollow" title="新浪微博"><span class="icon"></span></a>
+				</li>
+				<li class="twitter">
+					<a href={% if base.Qweibo %}"{{base.Qweibo}}"{% else %}"javascript:void(0)" class="tencent-share" {% endif %} rel="nofollow" title="腾讯微博"><span class="icon"></span></a>
+				</li>
+				<li class="feedus">
+					<a href="/feed" target="_blank" rel="nofollow" title="RSS 地址"><span class="icon"></span></a>
+				</li>
+			</ul>
+			<div id="anousment">
+				<div class="anousment-top"></div>
+				<div class="anousment-content">
+					<h3>{{base.Prompt}}</h3>
+					<div class="anousments">
+						{{base.Announcement}}
+					</div>
+				</div>
+				<div class="anousment-bottom"></div>
+			</div>
+		</div>
+		<div id="sidebar-content">
+			<div id="search-2" class="widget sidebar-box widget_search">
+			<form method="get" id="searchbar" action="/s/">
+				<input type="text" size="16" name="s" id="s" placeholder="搜索其实很简单" x-webkit-speech="" speech="">
+				<input type="submit" id="searchsubmit" value="">
+			</form>
+			</div>
+			{{calendar_my|safe}}				
+			<div id="recent-posts-2" class="widget sidebar-box widget_recent_entries">		
+				<h1>近期文章</h1>
+				<ul>
+				{%for e in r_blog%}
+					<li><a href="/html/{{e.key.id()}}.html#comments">{{e.titleb}}</a></li>
+				{%endfor%}
+				</ul>
+			</div>
+			<div id="recent-comments-2" class="widget sidebar-box widget_recent_comments">
+				<h1>近期评论</h1>
+				<ul id="recentcomments">
+				{%for e in r_msg%}
+					<li>					 
+						<a class="url" href="/html/{{e.blog_id}}.html#comments">
+							<img alt="" src="{{e.gravatar_url(e.email,base.ISHEADEG)}}" /><s class="notes-overlay2"></s>
+							{{e.nikname}}
+						</a>
+						<span>说：{{e.shortcontent|smellimg|safe}}...</span> 
+					</li>
+				{%endfor%}
+				</ul>
+			</div>
+			<div id="categories-2" class="widget sidebar-box widget_categories">
+				<h1>分类目录</h1>		
+				<ul class="tworow clearfix">
+				{%for e in r_class%}
+				<li class="cat-item cat-item-{{loop.index}}"><a href="/category/{{e.classname}}" title="查看{{e.content}}下的所有文章">{{e.content}}</a></li>
+				{%endfor%}
+				</ul>
+			</div>
+			<div id="tag_cloud-2" class="widget sidebar-box widget_tag_cloud">
+				<h1>标签云</h1>
+				<div class="tagcloud">
+					{%for e in r_tag%}
+						<a href="/tag/{{e.content}}" class="tag-link-{{loop.index}}" title="{{e.mcount}}个话题" style="font-size: {{e.mcount|getfontsize}}pt;">{{e.content}}</a>
+					{%endfor%}
+				</div>
+			</div>	
+			<div id="happyet_links-2" class="widget sidebar-box widget_happyet_links">
+				<h1>友情链接</h1>
+				<ul class="tworow clearfix">
+					<li><a href="http://blog.xcmd.net/" title="" target="_blank">Xblog</a></li>
+					{%for e in r_link%}
+						<li><a href="{{e.link}}" title="" target="_blank">{{e.title}}</a></li>
+					{%endfor%}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end sidebar -->

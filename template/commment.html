@@ -1,0 +1,125 @@
+<script type='text/javascript' src='/style/bluesky/comments-ajax.js?ver=1.3'></script>
+	{%if pagecount>0%}
+	<h2 id="comments">本文有评论 {{blog.comment_count}} 条<a style="margin-right:0;margin-left:384px;" href="#submit">评论</a></h2>	
+	<ol class="commentlist">
+		{% set lvalue = (pageindex-1)*pagenumber+1 %}
+		{% for comment in comments%}
+		<li class="comment byuser comment-author-root bypostauthor even thread-even depth-1" id="li-comment-{{comment.key.id()}}">
+			<div id="comment-{{comment.key.id()}}" class="comment-body">
+				<div class="comment-avatar">
+					<img alt="" src="{{comment.gravatar_url(comment.email,base.ISHEADEG)}}" class="avatar avatar-40 photo" height="40" width="40">
+					<a class="notes-overlay"></a>
+				</div>
+					<div class="commenttext">
+						<p>{{comment.content|smellimg|safe}}</p>
+					</div>
+				<div class="comment-author vcard">
+					<cite class="fn"><a target="_blank" href="{{comment.linkurl}}" rel="external nofollow" class="url">{{comment.nikname}}</a></cite> {{comment.date|gettimeba}} <span class="floor">{{lvalue}}楼</span> <span class="comment-meta commentmetadata"></span> 
+					<span class="reply">
+					<a class="comment-reply-link" href="javascript:void(0)" onclick="return addComment.moveForm(&quot;comment-{{comment.key.id()}}&quot;, &quot;{{comment.key.id()}}&quot;, &quot;respond&quot;, &quot;{{blog.key.id()}}&quot;)">回复</a>
+					</span>
+				</div>
+			</div>
+			{% for commentc in comment.children(comment.key.id())%}
+			<ul class="children">
+				<li class="comment byuser comment-author-root bypostauthor odd alt depth-2" id="li-comment-{{commentc.key.id()}}">
+				<div id="comment-{{commentc.key.id()}}" class="comment-body">
+					<div class="comment-avatar">
+						<img alt="" src="{{commentc.gravatar_url(commentc.email,base.ISHEADEG)}}" class="avatar avatar-40 photo" height="40" width="40">
+						<a class="notes-overlay"></a>
+					</div>
+					<div class="commenttext">
+						<p>{{commentc.content|smellimg|safe}}</p>
+					</div>
+					<div class="comment-author vcard">
+						<cite class="fn"><a target="_blank" href="{{commentc.linkurl}}" rel="external nofollow" class="url">{{commentc.nikname}}</a></cite> {{commentc.date|gettimeba}} <span class="floor"></span>
+						<span class="comment-meta commentmetadata"></span>
+						<span class="reply">
+						<a class="comment-reply-link" href="javascript:void(0)" onclick="return addComment.moveForm(&quot;comment-{{commentc.key.id()}}&quot;, &quot;{{commentc.key.id()}}&quot;, &quot;respond&quot;, &quot;{{blog.key.id()}}&quot;)">回复</a>
+						</span>
+					</div>
+				</div>
+				{% for commentd in commentc.children(commentc.key.id())%}
+				<ul class="children">
+					<li class="comment byuser comment-author-root bypostauthor odd alt depth-2" id="li-comment-{{commentd.key.id()}}">
+					<div id="comment-{{commentd.key.id()}}" class="comment-body">
+						<div class="comment-avatar">
+							<img alt="" src="{{commentd.gravatar_url(commentd.email,base.ISHEADEG)}}" class="avatar avatar-40 photo" height="40" width="40">
+							<a class="notes-overlay"></a>
+						</div>
+						<div class="commenttext">
+							<p>{{commentd.content|smellimg|safe}}</p>
+						</div>
+						<div class="comment-author vcard">
+							<cite class="fn"><a target="_blank" href="{{commentd.linkurl}}" rel="external nofollow" class="url">{{commentd.nikname}}</a></cite> {{commentd.date|gettimeba}} <span class="floor"></span>
+							<span class="comment-meta commentmetadata"></span>
+							<span class="reply">
+							<a style="display:none" class="comment-reply-link" href="javascript:void(0)" onclick="return addComment.moveForm(&quot;comment-{{commentd.key.id()}}&quot;, &quot;{{commentd.key.id()}}&quot;, &quot;respond&quot;, &quot;{{blog.key.id()}}&quot;)">回复</a>
+							</span>
+						</div>
+					</div>
+					</li><!-- #comment-## -->
+				</ul><!-- .children -->
+				{% endfor %}
+				</li><!-- #comment-## -->
+			</ul><!-- .children -->
+			{% endfor %}
+		</li><!-- #comment-## -->
+		{% set lvalue = lvalue+1 %}
+		{% endfor %}
+	</ol>
+	{% endif %}
+		{{pageindex|commentpages(pagecount,blog.ispage,blog.pagename,blog.key.id())|safe}}		
+	    <div id="respond">
+		<div id="cancel-comment-reply"> 
+			<small><a rel="nofollow" id="cancel-comment-reply-link" href="/wordpress/?p=5#respond" style="display:none;">点击这里取消回复。</a></small>
+		</div>
+		<h3>发表评论</h3> 
+		<form action="#" method="post" id="commentform">
+			<!-- 有资料的访客 -->
+			<div id="author_info" {% if comment_author %}style="display:none;"{% endif %}>
+				<p><input type="text" name="author" id="author" value="{{comment_author}}" size="22" tabindex="1" aria-required="true"><label for="author"><small> 昵称 (必填)</small></label></p>
+				<p><input type="text" name="email" id="email" value="{{comment_author_email}}" size="22" tabindex="2" aria-required="true"><label for="email"><small> 邮箱 (必填)</small></label></p>
+				<p><input type="text" name="url" id="url" value="{{comment_author_url}}" size="22" tabindex="3"><label for="url"><small> 网站 </small></label></p>
+			</div>
+			<!-- 有资料的访客 -->
+			<script type="text/javascript">function setStyleDisplay(id, status){document.getElementById(id).style.display = status;}</script>
+			<div class="form_row small" {% if not comment_author %}style="display:none;"{% endif %}>
+				欢迎回来 <strong>{{comment_author}}</strong>.<span id="show_author_info"><a href="javascript:setStyleDisplay('author_info','');setStyleDisplay('show_author_info','none');setStyleDisplay('hide_author_info','');">修改信息 »</a></span>
+				<span id="hide_author_info" style="display: none;"><a href="javascript:setStyleDisplay('author_info','none');setStyleDisplay('show_author_info','');setStyleDisplay('hide_author_info','none');">关闭 »</a></span>
+			</div>
+<p>
+</p>
+<div class="smiley">
+</div>
+<p>
+</p>
+			<p>
+			<textarea name="comment" id="comment" tabindex="4"></textarea>
+			<div id="loading" style="display: none;">
+			<img src="/style/bluesky/images/wpspin_light.gif" style="vertical-align:middle;" alt="">正在提交, 請稍候...</div>
+			<div id="error" style="display: none;">#</div>
+			</p>
+			<p>
+				<input name="submit" type="submit" id="submit" tabindex="5" value="提交评论/Ctrl+Enter">
+				<input type="hidden" name="comment_post_ID" value="{{blog.key.id()}}" id="comment_post_ID">
+				<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+			</p>
+			<script language="javascript">
+			document.getElementById("comment").onkeydown = function (moz_ev)
+			{
+				var ev = null;
+				if (window.event){
+				ev = window.event;
+					}else{
+					ev = moz_ev;
+				}
+				if (ev != null && ev.ctrlKey && ev.keyCode == 13)
+				{
+				document.getElementById("submit").click();
+				}
+			}
+			</script>			
+		</form>
+	</div>
+	

@@ -1,0 +1,177 @@
+{% include 'template/admin/header.html' %}
+<link rel="stylesheet" href="/style/kindeditor411/themes/default/default.css" />
+<script charset="utf-8" src="/style/kindeditor411/kindeditor-min.js"></script>
+<script charset="utf-8" src="/style/kindeditor411/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#tb_ispage").change(function (event) {
+            if($("#tb_ispage").prop("checked") === true) {
+                $(this).val('true');
+                $('#page').show();
+            }
+            else {
+                $(this).val('false');
+                $('#page').hide();
+            }
+        });
+		function showispage(v){
+			if(v=='True'){
+				$('#page').show();
+				$("#tb_ispage").prop("checked",true);
+				}
+			else{
+				$('#page').hide();
+				$("#tb_ispage").prop("checked",false);
+				}
+		}
+		showispage('{{blog.ispage}}')
+		$("#tb_start,#tb_istop,#tb_ismsg").change(function (event) {
+            if($(this).prop("checked") === true) {
+                $(this).val('true');
+            }
+            else {
+                $(this).val('false');
+            }
+        });
+		KindEditor.plugin('hello', function(K) {
+				var editor = this, name = 'hello';				 
+				editor.clickToolbar(name, function() {
+					var cmd = editor.cmd;
+					cmd.wrap('<blockquote><p></p></blockquote>');					
+					cmd.select();
+				});
+			});
+		KindEditor.lang({
+			hello : '自定义格式'
+		});
+		var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="tb_foreword"]', {
+					cssPath : ['/style/kindeditor411/plugins/code/prettify.css'],
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat','clearhtml', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist','code','|', 'emoticons', 'image','flash', 'link','source','preview','fullscreen','hello']
+				});
+			});
+		var editor2;
+			KindEditor.ready(function(K) {
+				editor2 = K.create('textarea[name="tb_content"]', {
+					cssPath : ['/style/kindeditor411/plugins/code/prettify.css'],
+					resizeType : 1,
+					allowPreviewEmoticons : false,
+					allowImageUpload : false,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat','clearhtml', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist','code','|', 'emoticons', 'image','flash', 'link','source','preview','fullscreen','hello']
+				});
+			});
+    });
+</script>
+<div class="function">
+    <ul>
+        <li><a href="/admin/blog_add">发表</a></li>
+		<li><a href="/admin/blog">文章</a></li>
+		<li><a href="/admin/blog_p">页面</a></li>
+    </ul>
+</div>
+<table class="left">
+    <tbody>
+        <tr>
+            <td>
+                <form action="{{action_url}}" method="post">
+				<fieldset>
+					<legend>修改博客</legend>				
+                <div class="editer" >
+                    <label for="tb_title">
+                        标题：</label>
+                    <input  id="tb_title" name="tb_title" type="text" value="{{blog.titleb}}">
+                </div>
+				<div class="editer" >
+                    <label for="tb_foreword">
+                        前言：</label>
+                    <textarea  style="width:760px;height:160px;visibility:hidden;" id="tb_foreword" name="tb_foreword">{{blog.foreword}}</textarea>
+                </div>
+				<div class="editer" >
+                    <label for="tb_content">
+                        内容：</label>
+                    <textarea  style="width:760px;height:300px;visibility:hidden;" id="tb_content" name="tb_content">{{blog.content}}</textarea>
+                </div>
+				<div class="editer" >
+                    <label for="tb_tags">
+                        标签：</label>
+                    <input  id="tb_tags" name="tb_tags" type="text" value="{{blog.tagslist}}">
+                </div>
+				<div class="editer" >
+                    <label for="tb_start">
+                        发布：</label>
+                    <input  id="tb_start" name="tb_start" type="checkbox" {%if blog.start==True %}checked="checked"{%endif%} value="{{blog.start}}">
+                </div>
+				<div class="editer" >
+                    <label for="tb_istop">
+                        置顶：</label>
+                    <input  id="tb_istop" name="tb_istop" type="checkbox" {%if blog.istop==True %}checked="checked"{%endif%} value="{{blog.istop}}"/>
+                </div>
+				<div class="editer" >
+                    <label for="tb_ismsg">
+                        评论：</label>
+                    <input  id="tb_ismsg" name="tb_ismsg" type="checkbox" {%if blog.ismsg==True %}checked="checked"{%endif%} value="{{blog.ismsg}}"/>
+                </div>
+				<div class="editer" >
+                    <label for="tb_classid">
+                        分类：</label>
+						<select id="tb_classid" name="tb_classid">
+						{% for tag in Tags %}	
+							<option {%if tag.key.id()==blog.classid%}selected="selected"{%endif%} value ="{{tag.key.id()}}">{{tag.content}}</option>
+						{%endfor%}
+						</select>
+                </div>
+                <div class="editer">
+                    <label for="tb_ispage">
+                        页面：</label>
+                    <input type="checkbox" id="tb_ispage" name="tb_ispage" value="{{blog.ispage}}"></div>               
+                <div id="page" style="display: none">
+                    <div class="editer">
+                        <label for="tb_pagename">
+                            浏览名字</label>
+                        <input type="text" value="{{blog.pagename}}" id="tb_pagename" size="10" name="tb_pagename">
+                    </div>
+					<div class="editer">
+                        <label for="tb_pageindex">
+                            页面顺序</label>
+                        <input type="text" value="{{blog.pageindex}}" id="tb_pageindex" size="10" name="tb_pageindex">
+                    </div>
+					<div class="editer" >
+						<label for="tb_top_id">
+                        父级：</label>
+						<select id="tb_top_id" name="tb_top_id">
+						<option value ="0">无父级</option>
+						{% for p in pagelist %}                         
+						  <option {%if p.key.id()==blog.top_id%}selected="selected"{%endif%} value ="{{p.key.id()}}">{{p.pagename}}</option>
+						{%endfor%}
+						</select>
+					</div>
+                </div>
+                <div class=tb_footer>
+                    <input type="submit" value="保存" id="btn_save">
+                    <span id="span_msg">
+                    </span>
+                </div>
+				</fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="readme">
+					<strong>提示</strong>:<span class="field-validation-error">*</span>
+				</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% include 'template/admin/footer.html' %} 

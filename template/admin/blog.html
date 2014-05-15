@@ -1,0 +1,70 @@
+{% include 'template/admin/header.html' %}
+<script type="text/javascript">
+$(document).ready(function () {
+	$("#btn_search").click(function () {
+		searchall('/Admin/User/?key=' + $('#key').val() + '&type=' + $('#cardST').val());
+	});
+});
+</script>
+<div class="function">
+    <ul>
+        <li><a href="/admin/blog_add">发表</a></li>
+		<li><a href="/admin/blog">文章</a></li>
+		<li><a href="/admin/blog_p">页面</a></li>
+    </ul>
+</div>
+<table>
+    <tbody>
+	{%- if issearch -%}
+		<tr>
+			<td colspan="3" align="left">            
+				标题:<input id="key" type="text" maxlength="8" name="key">
+				<input type="button" id="btn_search" class="default" value="查询">
+			</td>
+		</tr>
+	{% endif %}	
+    <tr>
+        <th>
+            标题
+        </th>
+        <th>
+            状态
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+	{% for blog in Blog %}
+		<tr>
+            <td>
+                {{blog.titleb}}
+            </td>
+            <td>
+                {{blog.start|get_blogstart}}
+            </td>
+            <td>
+				{%if blog.ispage%}
+				<a href="/page/{{blog.pagename}}.html">浏览</a>|
+				{%else%}
+				<a href="/html/{{blog.key.id()}}.html">浏览</a>|
+				{%endif%}
+				<a href="/admin/blog_uptata?id={{blog.key.id()}}">编辑</a>|
+				<a href="/admin/blog_delete?tb=blog&id={{blog.key.id()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+        
+</tbody>
+</table>
+
+<br/>
+{%- if issearch -%}
+<div class="navigation">
+	<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+	<script type="text/javascript">
+	showPageLink("/admin/blog/",{{pageindex}},{{pagecount}},"");
+	</script>
+	<span class="pages"> 第 {{pageindex}} 页  共 {{pagecount}} 页 </span>
+</div>
+{% endif %}	
+{% include 'template/admin/footer.html' %} 

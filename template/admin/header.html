@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+	<title>Xblog 系统后台</title>	
+	<link href="/style/admin.css?v=1" rel="stylesheet" type="text/css" />
+	<script src="/style/jquery/jquery-1.9.1.min.js"></script>
+	<script src="/style/jquery/jquery-ui.min.js"></script>
+	<script src="/style/admin.js"></script>
+	<link href="/style/jquery/base/minified/jquery-ui.min.css?v=1" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="page">
+      <div id="header">
+        <h1 id="title">Xblog 系统后台 {{COPYRIGHT}}</h1>
+        <div id="logindisplay"><a href="/">浏览</a> 欢迎 {{nickname}} | 
+        <a href="{{nickurl}}">退出</a></div>
+        <p id="menu">
+			<a {{current|get_titlecss('default')}} href="/admin/index">首页</a>
+			<a {{current|get_titlecss('blog')}} href="/admin/blog">博客管理</a>
+			<a {{current|get_titlecss('comment')}} href="/admin/comment">评论管理</a>
+			<a {{current|get_titlecss('tag')}} href="/admin/tag">标签管理</a>
+			<a {{current|get_titlecss('img')}} href="/admin/img">附件管理</a>
+			<a {{current|get_titlecss('link')}} href="/admin/link">链接管理</a>
+			<a {{current|get_titlecss('config')}} href="/admin/config">系统设置</a>
+		</p>
+      </div>
+      <div id="main">

@@ -1,0 +1,55 @@
+{% include 'template/header.html' %}
+<div id="content">
+	<div class="post_list">
+		{% for blog in Bloglist %}
+		<div class="post-562 post type-post status-publish format-standard hentry category-uncategorized tag-post-formats" id="post-562">
+			{%- if blog.istop -%}
+			<span class="sticky"><span>[置顶]</span></span>
+			{%- endif -%}
+			<div class="author_show">
+				<div class="author_face">
+					<img alt="" src="{{blog.classimg}}" class="avatar avatar-60 photo avatar-default" height="60" width="60">
+				</div>
+				<span title='喜欢' v='{{blog.key.id()}}' class="views">{{blog.praise_count}}</span>
+			</div>
+			<div class="post_content">
+				<h1><a href="/html/{{blog.key.id()}}.html" rel="bookmark">{{blog.titleb}}</a></h1>
+				<div class="entry">
+					<p>{{blog.foreword|safe}}</p>
+				</div>
+			</div>
+			<div class="meta_container">
+				<div class="tags clearfix">
+					<a href="/category/{{blog.classname}}" title="查看{{blog.tagname}}中的全部文章" rel="tag">{{blog.tagname}}</a>
+					{% for tag in blog.tags %}
+						<a href="/tag/{{tag}}" rel="tag">{{tag}}</a>
+					{% endfor %}
+				</div>
+				<ul class="meta clearfix">
+					<li class="date"><a href='/{{blog.date|gettime_date}}'>{{blog.date|gettimeba}}</a></li>
+					<li class="comments">
+						{%- if blog.ismsg -%}
+						<a href="/html/{{blog.key.id()}}.html#comments" title="查看评论">{{blog.comment_count}}条评论</a>
+						{% else %}
+							<span><a>已关闭评论</a></span>
+						{%- endif -%}						
+					</li>
+					<li class="browses">
+						<span><a>{{blog.browse_count}}次浏览</a></span>
+					</li>
+					<li class="read_more"><a href="/html/{{blog.key.id()}}.html" rel="bookmark">更多...</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="post-bottom"></div>
+		{% endfor %}
+		<div id="pagination" class="clearfix">
+			<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+			<script type="text/javascript">
+				showPageLink("{{pageurl}}",{{pageindex}},{{pagecount}},"");
+			</script>
+			<span id='pag-count'>第 {{pageindex}} 页  共 {{pagecount}} 页</span>
+		</div>
+	</div>
+
+{% include 'template/footer.html' %}

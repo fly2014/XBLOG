@@ -1,0 +1,76 @@
+{% include 'template/admin/header.html' %}
+<script type="text/javascript">
+$(document).ready(function () {
+ $("#dellmsgid").click(function(){
+	if($(this).prop('checked'))
+		$("table").find(':checkbox').prop('checked',true);
+	else
+		$("table").find(':checkbox').prop('checked',false);
+  });
+  $("#delallid").click(function(){
+	var checkedl = [];
+	$("table").find('.dc').each(function() {
+            if($(this).prop('checked'))
+				checkedl.push($(this).val());
+    });
+	//alert(checkedl);return false;
+	$.get("/admin/comment_delete",{id:checkedl.join(),'tb':'comment'},function(data) {
+		window.location.href='/admin/comment';		
+	});
+  });
+});
+</script>
+<div class="function">
+    <ul>
+		<li><a href="/admin/comment">留言</a></li>
+    </ul>
+</div>
+<table>
+    <tbody>
+    <tr>
+        <th>
+            作者
+        </th>
+		<th>
+            内容
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+	{% for msg in msgs %}
+		<tr>
+            <td>
+                {{msg.nikname}}
+			</td>
+			<td>
+				{{msg.content|safe}}
+            </td>
+            <td>
+				<input class='dc'  id="dellmsgid{{loop.index}}" name="dellmsgid" type="checkbox" value="{{msg.key.id()}}"/>
+				<a href="/html/{{msg.blog_id}}.html#comments">浏览</a>|
+				<a href="/admin/comment_delete?tb=comment&id={{msg.key.id()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+     <tr>
+        <td>
+        </td>
+		<td>
+        </td>
+        <td>
+			<input  id="dellmsgid" name="dellmsgid" type="checkbox" />
+            <a id='delallid'  href="javascript:void(0)">删除</a>
+        </td>
+    </tr>   
+</tbody>
+</table>
+<br/>
+<div class="navigation">
+	<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+	<script type="text/javascript">
+	showPageLink("/admin/comment/",{{pageindex}},{{pagecount}},"");
+	</script>
+	<span class="pages"> 第 {{pageindex}} 页  共 {{pagecount}} 页 </span>
+</div>
+{% include 'template/admin/footer.html' %} 

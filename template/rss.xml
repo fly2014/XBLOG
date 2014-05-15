@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>{{ base.TITLE|escape }}</title>
+	<atom:link href="{{ base.HOSTURL }}/feed" rel="self" type="application/rss+xml" />
+	<link>{{ base.HOSTURL }}</link>
+	<description>{{ base.SUBTITLE|escape }}</description>
+	<lastBuildDate>{{last_updated}}</lastBuildDate>
+	<language>zh-cn</language>
+	<sy:updatePeriod>daily</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>Xblog-Python 1.0</generator>
+		{% for entry in entries %}
+		<item>
+		<title>{{entry.titleb|escape}}</title>
+		<link>{{ base.HOSTURL }}/html/{{entry.key.id()}}.html</link>
+		<comments>{{ base.HOSTURL }}/html/{{entry.key.id()}}.html#comments</comments>
+		<pubDate>{{entry.date|gettime_date}}</pubDate>
+		<dc:creator>{{entry.email}}</dc:creator>
+				{%for tag in entry.tags%}<category><![CDATA[{{tag}} ]]></category>
+{%endfor%}
+
+		<guid isPermaLink="false">{{ base.HOSTURL }}/html/{{entry.key.id()}}.html</guid>
+		<description><![CDATA[{{entry.foreword|escape}}]]></description>
+			<content:encoded><![CDATA[{{entry.content|escape}}
+			<h4>相关阅读</h4>
+			<ul>
+				{% for blogc in entry.class_blog_list(entry.classid,base.CLASSBLOGCOUNT) %}
+				<li><a href="{{ base.HOSTURL }}/html/{{blogc.key.id()}}.html">{{blogc.titleb}}</a></li>
+				{% endfor %}
+			</ul>
+			<p>本文网址:<a href="{{ base.HOSTURL }}/html/{{entry.key.id()}}.html">{{ base.HOSTURL }}/html/{{entry.key.id()}}.html#comments</a></p>
+			]]></content:encoded>
+		<wfw:commentRss>{{ base.HOSTURL }}/html/{{entry.key.id()}}.html#comments</wfw:commentRss>
+		<slash:comments>{{entry.comment_count}}</slash:comments>
+		</item>
+		{%endfor%}
+	</channel>
+</rss>

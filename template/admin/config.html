@@ -1,0 +1,128 @@
+{% include 'template/admin/header.html' %}
+<table class="left">
+    <tbody>
+        <tr>
+            <td>
+                <form action="{{action_url}}" method="post">
+				<fieldset>
+					<legend>系统设置</legend>				
+				<div class="editer" >
+                    <label for="AUTHOR">
+                        作者：</label>
+                    <input  id="AUTHOR" name="AUTHOR" type="text" value="{{base.AUTHOR}}">&nbsp;EMAIL:<input  id="EMAIL" name="EMAIL" type="text" value="{{base.EMAIL}}">
+                </div>
+				<div class="editer" >
+                    <label for="HOSTURL">
+                        网址：</label>
+                    <input  id="HOSTURL" name="HOSTURL" type="text" value="{{base.HOSTURL}}">
+                </div>
+				<div class="editer" >
+                    <label for="TITLE">
+                        标题：</label>
+                    <input  id="TITLE" name="TITLE" type="text" value="{{base.TITLE}}">&nbsp;其他默认:<input  id="MTITLE" name="MTITLE" type="text" value="{{base.MTITLE}}">
+                </div>
+				<div class="editer" >
+                    <label for="SUBTITLE">
+                        description：</label>
+                    <input  id="SUBTITLE" name="SUBTITLE" type="text" value="{{base.SUBTITLE}}">&nbsp;其他默认:<input  id="MSUBTITLE" name="MSUBTITLE" type="text" value="{{base.MSUBTITLE}}">
+                </div>
+				<div class="editer" >
+                    <label for="KEY">
+                        keywords：</label>
+                    <input  id="KEY" name="KEY" type="text" value="{{base.KEY}}">&nbsp;其他默认:<input  id="MKEY" name="MKEY" type="text" value="{{base.MKEY}}">
+                </div>
+				<div class="editer" >
+                    <label for="PAGENUMBER">
+                        分页数量：</label>
+                    <input  id="PAGENUMBER" name="PAGENUMBER" type="text" value="{{base.PAGENUMBER}}">
+                </div>
+				<div class="editer" >
+                    <label for="COMMENTNUMBER">
+                        留言分页数量：</label>
+                    <input  id="COMMENTNUMBER" name="COMMENTNUMBER" type="text" value="{{base.COMMENTNUMBER}}">
+                </div>
+				<div class="editer" >
+                    <label for="ISHEADEG">
+                        随机头像：</label>
+					<select id="ISHEADEG" name="ISHEADEG">						                         
+						  <option {%if base.ISHEADEG==False %}selected="selected"{%endif%} value="0">否</option>
+						  <option {%if base.ISHEADEG==True %}selected="selected"{%endif%} value="1">是</option>
+					</select>
+                </div>
+				<div class="editer" >
+                    <label for="ISSENDMSG">
+                        评论邮件：</label>
+                    <select id="ISSENDMSG" name="ISSENDMSG">						                         
+						  <option {%if base.ISSENDMSG==False %}selected="selected"{%endif%} value="0">否</option>
+						  <option {%if base.ISSENDMSG==True %}selected="selected"{%endif%} value="1">是</option>
+					</select>
+                </div>
+				<div class="editer" >
+                    <label for="CLASSBLOGCOUNT">
+                        相关文章数量：</label>
+                    <input  id="CLASSBLOGCOUNT" name="CLASSBLOGCOUNT" type="text" value="{{base.CLASSBLOGCOUNT}}">
+                </div>
+				<div class="editer" >
+                    <label for="TAGCOUNT">
+                        标签数量：</label>
+                    <input  id="TAGCOUNT" name="TAGCOUNT" type="text" value="{{base.TAGCOUNT}}">
+                </div>
+				<div class="editer" >
+                    <label for="BLOGCOUNT">
+                        博客数量：</label>
+                    <input  id="AUTHOR" name="BLOGCOUNT" type="text" value="{{base.BLOGCOUNT}}">
+                </div>
+				<div class="editer" >
+                    <label for="MSGCOUNT">
+                        留言数量：</label>
+                    <input  id="MSGCOUNT" name="MSGCOUNT" type="text" value="{{base.MSGCOUNT}}">
+                </div>
+				<div class="editer" >
+                    <label for="Prompt">
+                        提示：</label>
+                    <input  id="Prompt" name="Prompt" type="text" value="{{base.Prompt}}">
+                </div>
+				<div class="editer" >
+                    <label for="Announcement">
+                        公告：</label>
+                    <input  id="Announcement" name="Announcement" type="text" value="{{base.Announcement}}">
+                </div>
+				<div class="editer" >
+                    <label for="QQ">
+                        QQ：</label>
+                    <input  id="QQ" name="QQ" type="text" value="{{base.QQ}}">
+                </div>
+				<div class="editer" >
+                    <label for="Qweibo">
+                        QQ微博：</label>
+                    <input  id="Qweibo" name="Qweibo" type="text" value="{{base.Qweibo}}">
+                </div>
+				<div class="editer" >
+                    <label for="Sweibo">
+                        新浪微博：</label>
+                    <input  id="Sweibo" name="Sweibo" type="text" value="{{base.Sweibo}}">
+                </div>
+				<div class="editer" >
+                    <label for="TONGJI">
+                        统计代码：</label>
+                    <input  id="TONGJI" name="TONGJI" type="text" value="{{base.TONGJI}}">
+                </div>
+				<div class=tb_footer>
+                    <input type="submit" value="保存" id="btn_save">
+                    <span id="span_msg">
+                    </span>
+                </div>
+				</fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="readme">
+					<strong>提示</strong>:<span style='color:red;' class="field-validation-error">* 首页 页面 日历 都加了缓存 保存会更新！</span>
+				</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% include 'template/admin/footer.html' %} 

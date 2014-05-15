@@ -1,0 +1,360 @@
+html, body,form
+{
+    padding: 0;
+    margin: 0;
+}
+body
+{
+    background-color: #1A334D;
+    font-size: .85em;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+a
+{
+    color: #333;
+}
+a:hover
+{
+    color: #ff0000;
+    text-decoration: underline;
+}
+table [type=text],table textarea
+{
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+}
+fieldset
+{
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+}
+legend
+{
+    padding: 5px;
+    border: 1px solid #999;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #000000;
+}
+select
+{
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+}
+table
+{
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+table td
+{
+    padding: 5pt;
+    border: solid 1px #e8eef4;
+}
+table th
+{
+    padding: 6px 5px;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
+    font-weight: bolder;
+}
+#header, #footer, #nav
+{
+    display: block;
+}
+#header
+{
+    position: relative;
+    margin:0;
+    color: #000;
+    padding: 0;
+}
+#title
+{
+    color: white;
+    font-size: 27px;
+}
+#main
+{
+	width:930px;
+    padding: 15px;
+    background-color: #fff;
+    min-height: 450px;
+}
+.page
+{
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#footer
+{
+    color: White;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin:0;
+    font-size: .9em;
+}
+.clear
+{
+    clear: both;
+}
+.error
+{
+    color: Red;
+}
+#logindisplay
+{
+    float: right;
+    color: White;
+    clear:right;
+}
+#logindisplay a
+{
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bolder;
+}
+.checkboxlist
+{
+    margin-left: 125px;
+}
+.checkboxlist li
+{
+    display: inline;
+    float: left;
+    width: 80px;
+}
+.operate a
+{
+    margin: 0 3px;
+    color: #696969;
+    text-decoration: none;
+}
+.operate a:hover
+{
+    text-decoration: underline;
+    color: #ff0000;
+}
+.function
+{   
+	border-bottom: 1px solid #999999;
+	width:920px;
+    padding:5px;
+    background-color: #E8EEF4;
+}
+.function ul{
+	display:block;
+	padding:5px;
+	margin:0px;
+}
+.function li
+{	
+    display: inline;
+	list-style: none;
+    margin-right: 8px;	
+}
+.function a
+{
+    text-decoration: none;
+}
+.editer fieldset
+{
+    margin-left: 50px;
+}
+.editer
+{
+    border-bottom: 1px dotted #CCCCCC;
+    clear: both;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    padding-right: 0.5em;
+    line-height: 2em;
+}
+.editer label
+{
+    width: 80px;
+    display: block;
+    float: left;
+    text-align: right;
+    margin-right:5px;
+}
+.editer textarea
+{
+    width: 400px;
+    height: 75px;
+}
+.detail
+{
+    display: block;
+    height: 1.5em;
+}
+#menu
+{	
+	margin:0;
+	padding:0;
+    text-align: left;
+}
+#menu a
+{
+    display: inline;
+    text-decoration: none;
+    padding:10px;
+    line-height: 34px;
+    background-color: white;
+}
+.current
+{
+    font-weight: bolder;
+    color: #ff0000;
+    background-color: white;
+}
+.message
+{
+    color: #ff0000;
+}
+#myselectp div, #myselectp select
+{
+    float: left;
+    display: block;
+}
+#myselectp
+{
+    height: 30px;
+}
+.left
+{
+    text-align: left;
+}
+.center
+{
+    text-align:center;
+}
+.readonly
+{
+    background-color:#D7D7D7;
+}
+#cardCount
+{
+    color:#ff0000;
+}
+.readme
+{
+    line-height:2em;
+    padding-left:125px;
+    font-size:14px;
+}
+.readmeLeft
+{
+    line-height:2em;
+    padding-left:2em;
+    font-size:14px;
+}
+.errormsg
+{
+    text-align:left;
+    width:100%;
+    padding-left:125px;
+}
+.editer .radiolabel
+{
+    float:none;
+    width:auto;
+    display:inline;
+    line-height:1.5em;
+}
+.localissue
+{
+    font-weight:bold;
+}
+.more-search
+{
+    cursor:pointer;
+    font-size:10px;
+}
+.oplink
+{
+    cursor:pointer;
+    text-decoration:underline;
+}
+.phead
+{
+    font-weight:bolder;
+    line-height:35pt;
+}
+.ptitle
+{
+    font-size:16pt;
+}
+.ptable
+{
+    width:610pt;
+    color:#000000;
+    margin:20pt auto;
+    font-size:11pt;
+    font-family:"微软雅黑",tahoma;
+}
+table.ptable td{
+    border: solid 1px black;
+}
+.tleft
+{
+    text-align:left;
+}
+.tcenter
+{
+    text-align:center;
+}
+.pintalble
+{
+    padding:0;
+    margin-top:0;
+}
+.redbox
+{
+    color:Red;
+}
+.llabe
+{
+    width: 60px;
+    display: inline-block;
+    text-align: right;
+}
+#lbox .editer
+{
+    border:0;
+}
+.lmsg
+{
+    text-align:center;
+}
+.logintitle
+{
+    position:absolute;
+    font-size:25px;
+    color:#E47019;
+    top:50px;
+    right:170px;
+    font-family: 微软雅黑, Verdana, sans-serif, 宋体;
+}
+.tb_footer
+{
+ text-indent:120px;
+ min-height:50px;
+}
+.ke-icon-hello {
+      background-image: url(/style/kindeditor411/themes/default/default.png);
+      background-position: 0px -672px;
+      width: 16px;
+      height: 16px;
+}

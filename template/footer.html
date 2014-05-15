@@ -1,0 +1,35 @@
+	<footer id="footer">
+		<nav class="footer main-navigation">
+			<ul id="foot-nav" class="menu">
+			<li id="menu-item-0"><a href="/">{{base.TITLE}}</a></li>
+			{% for p in pagelist %}                         
+				<li class="page_item page-item-{{loop.index}}"><a href="/page/{{p.pagename}}.html">{{p.titleb}}</a></li>
+			{%endfor%}
+			</ul>
+		</nav>		
+		<p class="copyright">{{base.TONGJI}}
+		<br> Powered by <a href="http://blog.xcmd.net/" title="" target="_blank">Xblog</a> {{COPYRIGHT}} @ GAE Theme by happyet</p>
+	</footer>
+	<a href="#" id="back_top" rel="nofollow" tabindex="-1">back up ↑</a>
+</div>
+{% include 'template/sidebar.html' %}
+<link rel="stylesheet" id="thickbox-css" href="/style/bluesky/thickbox.css" type="text/css" media="all">
+<script type="text/javascript" src="/style/bluesky/main.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var thickboxL10n = {"next":"\u4e0b\u4e00\u9875 >","prev":"< \u4e0a\u4e00\u9875","image":"\u56fe\u50cf","of":"\/","close":"\u5173\u95ed","noiframes":"\u8fd9\u4e2a\u529f\u80fd\u9700\u8981iframe\u7684\u652f\u6301\u3002\u60a8\u53ef\u80fd\u7981\u6b62\u4e86iframe\u7684\u663e\u793a\uff0c\u6216\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u6b64\u529f\u80fd\u3002","loadingAnimation":"/style/bluesky/images/loadingAnimation.gif","closeImage":"/style/bluesky/images/tb-close.png"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="/style/bluesky/thickbox.js"></script>
+</div>
+<link rel="stylesheet" href="/style/bluesky/stars.css" type="text/css" media="screen" />
+<div id="stars-1"></div>
+<div id="stars-2"></div>
+<div id="stars-3"></div>
+<div id="stars-4"></div>
+<div id="stars-5"></div>
+<div id="star-mask-left"></div>
+<div id="star-mask-right"></div>
+</div>
+</body>
+</html>

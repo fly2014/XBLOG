@@ -1,0 +1,74 @@
+{% include 'template/admin/header.html' %}
+<script type="text/javascript">
+    $(function () {
+        $("#tb_img").change(function (event) {
+            var file = $(this).val();
+			if(!file){
+				return false;
+			}
+			file = file.replace(/\\/g, "/");
+			var parts = file.split("/");
+			var filename = parts[parts.length - 1];
+			
+			var bits = filename.split(".");
+			var ext = bits[bits.length - 1];
+
+			
+			$("#tb_mext").val(ext.toLowerCase());
+			$("#tb_title").val(bits[bits.length-2]);
+			$("#tb_mtype").val(typelist[ext.toLowerCase()]);
+			return true;
+        });
+    });
+</script>
+<div class="function">
+    <ul>
+        <li><a href="/admin/img_add">发表</a></li>
+		<li><a href="/admin/img">附件</a></li>
+    </ul>
+</div>
+<table class="left">
+    <tbody>
+        <tr>
+            <td>
+                <form action="{{action_url}}" method="post" enctype="multipart/form-data">
+				<fieldset>
+					<legend>修改附件</legend>				
+				<div class="editer" >
+                    <label for="tb_title">
+                        标题：</label>
+                    <input  id="tb_title" name="tb_title" type="text" value="{{img.title}}">
+					<input type="hidden" id="tb_mtype" name="tb_mtype" value="{{img.mtype}}">
+					<input type="hidden" id="tb_mext" name="tb_mext" value="{{img.mext}}">
+                </div>
+				<div class="editer">
+                    <label for="tb_img">
+                        文件：</label>
+                    <input type="file" id="tb_img" name="tb_img" value="">
+					<input type="hidden" id="tb_mtype" name="tb_mtype" value="">
+					<input type="hidden" id="tb_mext" name="tb_mext" value="">
+				</div> 
+				<div class="editer" >
+                    <label>宽：</label>
+                    <input  id="tb_width" size=4 name="tb_width" type="text" value="0">&nbsp;高:
+					<input  id="tb_height" size=4 name="tb_height" type="text" value="0">
+                </div>
+                <div class=tb_footer>
+                    <input type="submit" value="保存" id="btn_save">
+                    <span id="span_msg">
+                    </span>
+                </div>
+				</fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <pre class="readme">
+					<strong>提示</strong>:<span class="field-validation-error">*</span>
+				</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% include 'template/admin/footer.html' %} 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name = "viewport" content ="initial-scale=1.0,user-scalable=no">
+	<title>{{Mtitle}}-{{base.TITLE}}</title>
+	<meta name="keywords" content="{{MKEY}},{{base.KEY}}">
+	<meta name="description" content="{{SUBTITLE}}-{{base.SUBTITLE}}">
+	<link rel="stylesheet" href="/style/bluesky/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="/style/kindeditor411/plugins/code/prettify.css" />
+	<script type="text/javascript" src="/style/jquery/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/style/kindeditor411/plugins/code/prettify.js"></script>
+	<script>
+	$(function(){ prettyPrint(); });
+	</script>	
+</head>
+<body>
+<div class="dat-noise clearfix">
+<div id="page-wrap" class="container clearfix">
+<header class="clearfix">
+	<h1 id="logo"><a href="/" title="{{base.TITLE}}">{{base.TITLE}} MY个人IT日记本</a></h1>
+	<nav class="header main-navigation" id="menu-bar">
+	<ul id="nav" class="menu">
+		<li id="menu-item-0" class="{{current|get_pagecss('default')}}"><a href="/">首页</a></li>
+		{% for p in pagelist %}
+			<li class="page_item page-item-{{loop.index}} {{current|get_pagecss(p.pagename)}}"><a href="/page/{{p.pagename}}.html">{{p.titleb}}</a>			
+			{%if (p.getidpagechard(p.key.id()).count()>0)%}
+			<ul class="children">
+			{% for cp in p.getidpagechard(p.key.id()) %} 			
+				<li class="page_item page-item-{{cp.key.id()}}"><a href="/page/{{cp.pagename}}.html">{{cp.titleb}}</a></li>			
+			{%endfor%}
+			</ul>
+			{%endif%}
+			</li>
+		{%endfor%}
+	</ul>
+</nav>
+</header>

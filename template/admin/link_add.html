@@ -1,0 +1,43 @@
+{% include 'template/admin/header.html' %}
+<div class="function">
+    <ul>
+        <li><a href="/admin/link_add">发表</a></li>
+		<li><a href="/admin/link">链接</a></li>
+    </ul>
+</div>
+<table class="left">
+    <tbody>
+        <tr>
+            <td>
+                <form action="{{action_url}}" method="post" enctype="multipart/form-data">
+				<fieldset>
+					<legend>增加链接</legend>				
+				<div class="editer" >
+                    <label for="tb_title">
+                        标题：</label>
+                    <input  id="tb_title" name="tb_title" type="text" value="">
+                </div>
+                <div class="editer" >
+                    <label for="tb_link">
+                        地址：</label>
+                    <input  id="tb_link" name="tb_link" type="text" value="">
+                </div>             
+                <div class=tb_footer>
+                    <input type="submit" value="保存" id="btn_save">
+                    <span id="span_msg">
+                    </span>
+                </div>
+				</fieldset>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <pre class="readme">
+					<strong>提示</strong>:<span class="field-validation-error">*</span>
+				</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% include 'template/admin/footer.html' %} 

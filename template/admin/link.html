@@ -1,0 +1,47 @@
+{% include 'template/admin/header.html' %}
+<div class="function">
+    <ul>
+        <li><a href="/admin/link_add">发表</a></li>
+		<li><a href="/admin/link">链接</a></li>
+    </ul>
+</div>
+<table>
+    <tbody>
+    <tr>
+        <th>
+            标题
+        </th>
+        <th>
+            地址
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+	{% for link in links %}
+		<tr>
+            <td>
+                {{link.title}}
+            </td>
+            <td>
+                <a>{{link.link}}</a>
+            </td>
+            <td>
+				<a href="{{link.link}}">浏览</a>|
+				<a href="/admin/link_uptata?id={{link.key.id()}}">编辑</a>|
+				<a href="/admin/link_delete?tb=link&id={{link.key.id()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+        
+</tbody>
+</table>
+<br/>
+<div class="navigation">
+	<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+	<script type="text/javascript">
+	showPageLink("/admin/link/",{{pageindex}},{{pagecount}},"");
+	</script>
+	<span class="pages"> 第 {{pageindex}} 页  共 {{pagecount}} 页 </span>
+</div>
+{% include 'template/admin/footer.html' %} 

@@ -1,0 +1,51 @@
+{% include 'template/admin/header.html' %}
+<script type="text/javascript">
+$(document).ready(function () {
+	 
+});
+</script>
+<div class="function">
+    <ul>
+        <li><a href="/admin/img_add">发表</a></li>
+		<li><a href="/admin/img">附件</a></li>
+    </ul>
+</div>
+<table>
+    <tbody>
+    <tr>
+        <th>
+            标题
+        </th>
+        <th>
+            地址
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+	{% for img in Img %}
+		<tr>
+            <td>
+                {{img.title}}
+            </td>
+            <td>
+                <a href="/img/{{img.key.id()}}/{{img.title}}.{{img.mext}}">浏览</a>
+            </td>
+            <td>				
+				<a href="/admin/img_uptata?id={{img.key.id()}}">编辑</a>|
+				<a href="/admin/img_delete?tb=img&id={{img.key.id()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}
+        
+</tbody>
+</table>
+<br/>
+<div class="navigation">
+	<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+	<script type="text/javascript">
+	showPageLink("/admin/img/",{{pageindex}},{{pagecount}},"");
+	</script>
+	<span class="pages"> 第 {{pageindex}} 页  共 {{pagecount}} 页 </span>
+</div>
+{% include 'template/admin/footer.html' %} 

@@ -1,0 +1,48 @@
+{% include 'template/admin/header.html' %}
+<div class="function">
+    <ul>
+        <li><a href="/admin/tag_add">发表</a></li>
+		<li><a href="/admin/tag">标签</a></li>
+		<li><a href="/admin/tag_c">分类</a></li>
+    </ul>
+</div>
+<table>
+    <tbody>
+    <tr>
+        <th>
+            标题
+        </th>
+        <th>
+            频率
+        </th>
+        <th>
+            操作
+        </th>
+    </tr>
+	{% for tag in Tag %}
+		<tr>
+            <td>
+                {{tag.content}}
+            </td>
+            <td>
+                {{tag.mcount}}
+            </td>
+            <td>
+				<a href="/admin/tag_uptata?id={{tag.key.id()}}">编辑</a>|
+				<a href="/admin/tag_delete?tb=tag&id={{tag.key.id()}}">删除</a>
+            </td>
+        </tr>
+    {% endfor %}        
+</tbody>
+</table>
+<br/>
+{%- if issearch -%}
+<div class="navigation">
+	<script type="text/javascript" src="/style/tool/pagenavi.js"></script>
+	<script type="text/javascript">
+	showPageLink("/admin/tag/",{{pageindex}},{{pagecount}},"");
+	</script>
+	<span class="pages"> 第 {{pageindex}} 页  共 {{pagecount}} 页 </span>
+</div>
+{% endif %}
+{% include 'template/admin/footer.html' %} 

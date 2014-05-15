@@ -1,0 +1,69 @@
+{% include 'template/header.html' %}
+<div id="content">
+	<div class="post_list">
+		<div class="post type-post status-publish format-standard hentry category-2 category-uncategorized" id="post-5">
+			<div class="author_show">
+				<div class="author_face"><img alt="" src="{{blog.classimg}}" class="avatar avatar-60 photo" height="60" width="60"></div>
+				<span  title='喜欢' v='{{blog.key.id()}}' class="views">{{blog.praise_count}}</span>
+			</div>
+			<div class="post_content">
+				<h1><a href="/html/{{blog.key.id()}}.html" rel="bookmark">{{blog.titleb}}</a></h1>
+				<ul class="meta clearfix">
+					<li class="date"><a>{{blog.date|gettimeba}}</a></li>
+					<li class="comments"><a href="#comments" title="《{{blog.titleb}}》上的评论">{{blog.comment_count}}条评论</a></li>
+					<li class="browses"><span><a>{{blog.browse_count}}次浏览</a></span></li>
+					<li class="read_more qrcode-li"><a>二维码</a>
+						<div class="qrcode"><img src="http://chart.googleapis.com/chart?cht=qr&amp;chs=200x200&amp;choe=UTF-8&amp;chld=L|4&amp;chl={{base.HOSTURL}}/html/{{blog.key.id()}}.html" alt="二维码"></div>
+					</li>
+				</ul>
+				<div class="entry clearfix">
+					<p>{{blog.content|safe}}</p>
+				</div>
+			</div>
+			<div class="tags singletags">
+				<a href="/category/{{blog.classname}}" title="查看{{blog.tagname}}中的全部文章" rel="tag">{{blog.tagname}}</a>
+				{% for tag in blog.tags %}
+					<a href="/tag/{{tag}}" rel="tag">{{tag}}</a>
+				{% endfor %}
+			</div>
+			<div class="meta_container clearfix">
+				<h3 class="meta-title"><span>版权申明</span></h3>
+				<div class="post-copy">
+					<h3>若文中未注明，则本文由 {{nickname}} 原创，转载请注明出处。</h3>
+					<p class="copy-link">{{base.AUTHOR}} | {{base.HOSTURL}}/html/{{blog.key.id()}}.html</p>
+					<span class="zh_share"><span>分享</span>
+						<div id="sharebar"> 
+							<a rel="nofollow" id="twitter-share" title="Twitter">推特</a>
+							<a rel="nofollow" id="kaixin001-share" title="开心网">开心</a>
+							<a rel="nofollow" id="renren-share" title="人人网">人人</a>
+							<a rel="nofollow" id="douban-share" title="豆瓣">豆瓣</a>
+							<a rel="nofollow" id="fanfou-share" title="饭否">饭否</a>
+							<a rel="nofollow" class='sina-share' id="sina-share" title="新浪微博">新浪微博</a>
+							<a rel="nofollow" class='tencent-share' id="tencent-share" title="腾讯微博">腾讯微博</a>
+						</div>
+					</span>
+				</div>
+			</div>
+			<div class="relatepost clearfix">
+				<h3 class="meta-title"><span>相关文章</span></h3>
+				<ul class="clearfix">
+				{% for blogc in blog.class_blog_list(blog.classid,base.CLASSBLOGCOUNT) %}
+					<li><a href="/html/{{blogc.key.id()}}.html" rel="bookmark" title="{{blogc.titleb}}">{{blogc.titleb}}</a><span class="relatetime">{{blogc.date|gettimebad}}</span></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="post-bottom"></div>
+		<div id="pagination2" class="clearfix">
+			{% for blogo in blog.onpage(blog.date) %}
+			<div id="pag-next-wrap"><a title="{{blogo.titleb}}" href="/html/{{blogo.key.id()}}.html" rel="prev">上一篇</a></div>
+			{% endfor %}
+			{% for blogn in blog.nextpage(blog.date) %}
+			<div id="pag-prev-wrap"><a title="{{blogn.titleb}}" href="/html/{{blogn.key.id()}}.html" rel="next">下一篇</a></div>
+			{% endfor %}
+		</div>
+	</div>
+	{%if blog.ismsg %}
+		{% include 'template/commment.html' %}
+	{%endif%}
+{% include 'template/footer.html' %}

@@ -1,0 +1,18 @@
+   <li class="comment even thread-even depth-{{comment.key.id()}}" id="li-comment-{{comment.key.id()}}">
+     <div id="comment-{{comment.key.id()}}" class="comment-body">
+		<div class="comment-avatar">
+			<img alt='' src='{{comment.gravatar_url(comment.email,base.ISHEADEG)}}' class='avatar avatar-40 photo' height='40' width='40' /><a class="notes-overlay"></a>
+		</div>
+		<div class="commenttext">
+			<p>{{comment.content|smellimg|safe}}</p>
+			{% if comment.isshow %}
+			<em>您的评论正在等待审核。</em>
+			{% endif %}
+		</div>
+		<div class="comment-author vcard">
+			<cite class="fn">
+				<a target="_blank" href="{{comment.linkurl}}" rel="external nofollow" class="url">{{comment.nikname}}</a>
+			</cite> {{comment.date|gettimeba}} 
+			<span class="comment-meta commentmetadata"></span>
+		</div>
+	 </div>
